@@ -12,8 +12,8 @@ function Whether() {
             return;
         }
 
-        const apiKey = '5f114b623b2c42d49c3102625230807'
-        const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
+        const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+        const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
 
         axios.get(url)
         .then((res)=>{
