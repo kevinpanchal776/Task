@@ -1,0 +1,528 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: 550px;
+  background: url("/src/assets/weather1.jpg") no-repeat center center;
+  background-size: cover;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #fff;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(8, 18, 35, 0.82),
+    rgba(8, 18, 35, 0.75)
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+  padding-top: 140px;
+}
+
+/* ================= SEARCH ================= */
+.search-container {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto 50px auto;
+  position: relative;
+  z-index: 20;
+}
+
+.search-box {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+}
+
+.search-icon {
+  font-size: 20px;
+  color: #333;
+  margin-right: 14px;
+}
+
+.search-box input {
+  background: transparent;
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 17px;
+  font-weight: 500;
+  color: #222;
+}
+
+.search-box input::placeholder {
+  color: #666;
+}
+
+.clear-icon {
+  cursor: pointer;
+  font-size: 20px;
+  color: #888;
+  margin-left: 8px;
+  transition: color 0.2s ease;
+}
+
+.clear-icon:hover {
+  color: #f05a28;
+}
+
+.search-box::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: #f05a28;
+}
+
+/* ================= DROPDOWN ================= */
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #efefef;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 50;
+}
+
+.dropdown-item {
+  padding: 14px 20px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background: #e5e5e5;
+}
+
+.city-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+  display: block;
+}
+
+.city-region {
+  font-size: 14px;
+  color: #777;
+  margin-top: 4px;
+  display: block;
+}
+
+/* ================= RECENT ================= */
+.recent-section {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.recent-title {
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  margin-bottom: 18px;
+  opacity: 0.85;
+}
+
+.recent-cards {
+  display: flex;
+  gap: 22px;
+
+}
+
+/* ================= CARD ================= */
+.accu-card {
+  width: 240px;
+  height: 160px;
+  border-radius: 10px;
+  padding: 18px;
+  background: rgba(160, 160, 160, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 35px rgba(0,0,0,0.45);
+  transition: transform 0.25s ease;
+  cursor: pointer;
+}
+
+.accu-card:hover {
+  transform: translateY(-6px);
+}
+
+.accu-card h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.country {
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.temp-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.temp-row img {
+  width: 34px;
+}
+
+.temp-value {
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.temp-value span {
+  font-size: 18px;
+}
+
+.realfeel {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* ================= LOADING ================= */
+.loading {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablet (1024px thi niche) */
+@media (max-width: 1024px) {
+  .hero-content {
+    padding-top: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .search-container {
+    width: 100%;
+  }
+
+  .recent-section {
+    width: 100%;
+  }
+
+  .recent-cards {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .accu-card {
+    width: 45%;
+  }
+}
+
+/* Mobile (768px thi niche) */
+@media (max-width: 768px) {
+  .hero {
+    height: auto;
+    padding-bottom: 60px;
+  }
+
+  .hero-content {
+    padding-top: 80px;
+  }
+
+  .search-box {
+    padding: 14px 16px;
+  }
+
+  .search-box input {
+    font-size: 15px;
+  }
+
+  .recent-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .accu-card {
+    width: 100%;
+    max-width: 350px;
+  }
+}
+
+/* Small Mobile (480px thi niche) */
+@media (max-width: 480px) {
+  .search-box {
+    flex-direction: row;
+  }
+
+  .search-icon {
+    font-size: 16px;
+  }
+
+  .search-box input {
+    font-size: 14px;
+  }
+
+  .temp-value {
+    font-size: 32px;
+  }
+
+  .temp-value span {
+    font-size: 16px;
+  }
+
+  .accu-card {
+    height: auto;
+  }
+}
+
+/* ================= WEATHER WRAPPER ================= */
+
+.weather-wrapper {
+  padding: 50px 20px;
+  background: #f1f3f6;
+}
+
+/* Center Container */
+.today-card,
+.current-card {
+  max-width: 1020px;
+  margin: 0 auto 25px auto;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 28px 35px;
+  border: 1px solid #e6e6e6;
+}
+
+/* Section Header */
+.card-header {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #8a8a8a;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+/* ================= TODAY SECTION ================= */
+
+/* ================= TODAY WEATHER ================= */
+
+.today-card {
+  max-width: 1020px;
+  margin: 0 auto 25px auto;
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #e2e2e2;
+  overflow: hidden;
+}
+
+/* Header */
+.today-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 28px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #6b6b6b;
+  letter-spacing: 0.8px;
+  background: #f5f6f7;
+  border-bottom: 1px solid #e2e2e2;
+  text-transform: uppercase;
+}
+
+.today-date {
+  font-weight: 600;
+  
+}
+
+/* Body */
+.today-body {
+  padding: 24px 32px;
+}
+
+.today-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.today-row p {
+  font-size: 20px;
+  color: #111;
+  font-weight: 400;
+}
+
+.today-icon {
+  font-size: 22px;
+  margin-top: 4px;
+}
+
+.today-icon.hot {
+  color: #ff5a28;
+}
+
+.today-icon.moon {
+  color: #6a5acd;
+}
+
+/* ================= CURRENT SECTION ================= */
+
+/* ================= CURRENT WEATHER ================= */
+
+.current-card {
+  max-width: 1020px;
+  margin: 0 auto 25px auto;
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #e2e2e2;
+  overflow: hidden;
+}
+
+/* Header */
+.current-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 28px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #6b6b6b;
+  letter-spacing: 0.8px;
+  background: #f5f6f7;
+  border-bottom: 1px solid #e2e2e2;
+  text-transform: uppercase;
+}
+
+/* Body */
+.current-body {
+  display: flex;
+  justify-content: space-between;
+  padding: 28px 32px;
+}
+
+/* LEFT SIDE */
+.current-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.temp-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.weather-icon {
+  width: 88px;
+}
+
+.main-temp {
+  font-size: 90px;
+  font-weight: 400;
+  color: #1a1a1a;
+  line-height: 1;
+}
+
+.main-temp span {
+  font-size: 32px;
+  color: #666;
+}
+
+.realfeel {
+  font-size: 15px;
+  color: #666;
+  margin-top: 8px;
+}
+
+.weather-text {
+  font-size: 20px;
+  margin-top: 16px;
+  color: #111;
+}
+
+.more-details {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+/* RIGHT SIDE */
+.current-right {
+  width: 380px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 0;
+  font-size: 15px;
+  border-bottom: 1px solid #ececec;
+}
+
+.detail-row span:first-child {
+  color: #6b6b6b;
+  font-weight: 500;
+}
+
+.detail-row span:last-child {
+  color: #111;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .current-body {
+    flex-direction: column;
+  }
+
+  .current-right {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .main-temp {
+    font-size: 70px;
+  }
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .current-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .current-right {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .big-temp {
+    font-size: 60px;
+  }
+}
