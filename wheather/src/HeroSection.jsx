@@ -179,10 +179,13 @@ const HeroSection = () => {
                       setShowDropdown(false);
                     }}
                   >
-                    <span className="city-name">{item.name}</span>
-                    <span className="city-region">
-                      {item.region}, {item.country}
-                    </span>
+                    <div className="city-info">
+                      <span className="city-name">{item.name}</span>
+                      <span className="city-region">
+                        {item.region ? `${item.region}, ` : ""}
+                        {item.country}
+                      </span>
+                    </div>
                   </div>
                 ))}
               </div>
