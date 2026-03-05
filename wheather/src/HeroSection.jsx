@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FiSearch, FiX } from "react-icons/fi";
 import "./HeroSection.css";
+import SunIcon from "../src/assets/sun.svg";
+import MoonIcon from "../src/assets/moon.svg"
 
 const HeroSection = () => {
   const [input, setInput] = useState("");
@@ -102,6 +104,24 @@ const HeroSection = () => {
     }
   }, []);
 
+  const getWeatherIcon = (condition, apiIcon, isDay) => {
+
+    const text = condition.toLowerCase();
+
+    // Sunny Day
+    if (text.includes("sun") && isDay === 1) {
+      return SunIcon;
+    }
+
+    // Night
+    if (isDay === 0) {
+      return MoonIcon;
+    }
+
+    // Default API icon
+    return `https:${apiIcon}`;
+  };
+
   return (
     <>
       {/* ================= HERO (UNCHANGED) ================= */}
@@ -194,8 +214,15 @@ const HeroSection = () => {
 
                         <div className="temp-row">
                           <img
-                            src={`https:${data.current.condition.icon}`}
+                            src={
+                              data.current.is_day
+                                ? data.current.condition.text.toLowerCase().includes("sun")
+                                  ? SunIcon   // White Sun icon
+                                  : `https:${data.current.condition.icon}` // Optional fallback
+                                : MoonIcon     // White Moon icon for night
+                            }
                             alt="icon"
+                            className="recent-icon"
                           />
                           <div className="temp-value">
                             {data.current.temp_c}°
@@ -241,7 +268,8 @@ const HeroSection = () => {
               </div>
 
               <div className="today-row">
-                <span className="today-icon moon">🌙</span>
+                {/* Replace 🌙 emoji with MoonIcon */}
+                <img src={MoonIcon} alt="moon" className="today-icon" />
                 <p>
                   Tonight:{" "}
                   {selectedWeather.forecast.forecastday[0].day.condition.text}
@@ -265,8 +293,12 @@ const HeroSection = () => {
                 <div className="current-left">
                   <div className="temp-row">
                     <img
-                      src={`https:${selectedWeather.current.condition.icon}`}
-                      alt="weather icon"
+                      src={getWeatherIcon(
+                        selectedWeather.current.condition.text,
+                        selectedWeather.current.condition.icon,
+                        selectedWeather.current.is_day
+                      )}
+                      alt="weather"
                       className="weather-icon"
                     />
 
@@ -324,6 +356,68 @@ const HeroSection = () => {
               </div>
             </div>
           )}
+
+
+          {/* ================= HOURLY WEATHER ================= */}
+          <div className="hourly-container">
+
+            <div className="hourly-title">
+              HOURLY WEATHER
+            </div>
+
+            <div className="hourly-wrapper">
+
+              <button
+                className="scroll-btn left"
+                onClick={() =>
+                  document.getElementById("hourlyScroll")
+                    .scrollBy({ left: -400, behavior: "smooth" })
+                }
+              >
+                ‹
+              </button>
+
+              <div className="hourly-scroll" id="hourlyScroll">
+
+                {selectedWeather.forecast.forecastday[0].hour
+                  .filter((hour) => {
+                    const nowHour = new Date().getHours();
+                    const hourTime = new Date(hour.time).getHours();
+                    return hourTime >= nowHour;
+                  })
+                  .map((hour, index) => {
+                    const date = new Date(hour.time);
+                    const time = date.toLocaleTimeString([], { hour: "numeric" });
+
+                    return (
+                      <div className="hour-card" key={index}>
+                        <div className="hour-time">{time}</div>
+
+                        <img
+                          src={getWeatherIcon(hour.condition.text, hour.condition.icon, hour.is_day)}
+                          alt="weather"
+                          className="hour-icon"
+                        />
+
+                        <div className="hour-temp">{hour.temp_c}°</div>
+                        <div className="hour-rain">💧 {hour.chance_of_rain}%</div>
+                      </div>
+                    );
+                  })}
+              </div>
+
+              <button
+                className="scroll-btn right"
+                onClick={() =>
+                  document.getElementById("hourlyScroll")
+                    .scrollBy({ left: 400, behavior: "smooth" })
+                }
+              >
+                ›
+              </button>
+
+            </div>
+          </div>
         </div>
       )}
     </>
