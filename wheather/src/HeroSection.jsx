@@ -22,6 +22,9 @@ const HeroSection = () => {
     try {
       setLoading(true);
 
+      // ✅ URL parameter set
+      window.history.pushState({}, "", `city=${city}`);
+
       const res = await axios.get(
         `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=1&aqi=no`
       );
